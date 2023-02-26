@@ -7,10 +7,31 @@ type Node struct {
 	Next     *Node
 	Previous *Node
 }
+
 type DoublyLinkedList struct {
 	Head *Node
 	Tail *Node
 	Size int
+}
+
+func (ll *DoublyLinkedList) AddAtLast(data int) {
+	newNode := &Node{Value: data}
+
+	if ll.Head == nil {
+		ll.Head = newNode
+		ll.Tail = newNode
+	} else {
+		current := ll.Head
+
+		for current.Next != nil {
+			current = current.Next
+		}
+		newNode.Previous = current
+		current.Next = newNode
+		ll.Tail = newNode
+	}
+	ll.Size++
+
 }
 
 func (ll *DoublyLinkedList) RemoveAtFirst() {
@@ -19,6 +40,8 @@ func (ll *DoublyLinkedList) RemoveAtFirst() {
 	}
 	ll.Head = ll.Head.Next
 	ll.Tail = ll.Head
+
+	ll.Size--
 }
 
 func (ll *DoublyLinkedList) AddAtFirst(data int) {
@@ -32,6 +55,7 @@ func (ll *DoublyLinkedList) AddAtFirst(data int) {
 		newNode.Next = ll.Head
 		ll.Head = newNode
 	}
+	ll.Size++
 }
 
 func (ll *DoublyLinkedList) Display() {
@@ -53,5 +77,7 @@ func main() {
 	//Removing at first
 	List.RemoveAtFirst()
 
+	//Adding node at last
+	List.AddAtLast(23)
 	List.Display()
 }
