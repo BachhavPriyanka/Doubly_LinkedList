@@ -13,6 +13,14 @@ type DoublyLinkedList struct {
 	Size int
 }
 
+func (ll *DoublyLinkedList) RemoveAtFirst() {
+	if ll.Head == nil {
+		fmt.Println("Empty")
+	}
+	ll.Head = ll.Head.Next
+	ll.Tail = ll.Head
+}
+
 func (ll *DoublyLinkedList) AddAtFirst(data int) {
 	newNode := &Node{Value: data}
 
@@ -36,8 +44,14 @@ func (ll *DoublyLinkedList) Display() {
 }
 func main() {
 	List := DoublyLinkedList{}
-
+	//Adding at first
 	List.AddAtFirst(1)
-	List.AddAtFirst(22)
+	List.AddAtFirst(2)
+	List.AddAtFirst(3)
+	List.AddAtFirst(4)
+
+	//Removing at first
+	List.RemoveAtFirst()
+
 	List.Display()
 }
