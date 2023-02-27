@@ -14,6 +14,26 @@ type DoublyLinkedList struct {
 	Size int
 }
 
+func (ll *DoublyLinkedList) AddAtIndex(data int, pos int) {
+	newNode := &Node{Value: data}
+
+	if pos == 1 || pos == 0 {
+		ll.Head = newNode
+		ll.Tail = newNode
+	} else {
+		current := ll.Head
+		for i := 0; i < pos-2; i++ {
+			current = current.Next
+		}
+		newNode.Next = current.Next
+		newNode.Previous = current
+		current.Next.Previous = newNode
+		current.Next = newNode
+		ll.Size++
+	}
+
+}
+
 func (ll *DoublyLinkedList) RemoveAtLast() {
 	if ll.Head == nil {
 		fmt.Println("List is Empty")
@@ -94,7 +114,10 @@ func main() {
 	List.AddAtLast(23)
 
 	//Removing node from last
-	List.RemoveAtLast()
-	List.RemoveAtLast()
+	// List.RemoveAtLast()
+	// List.RemoveAtLast()
+
+	//Adding at index
+	List.AddAtIndex(88, 4)
 	List.Display()
 }
