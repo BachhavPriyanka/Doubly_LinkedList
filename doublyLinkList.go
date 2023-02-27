@@ -14,6 +14,19 @@ type DoublyLinkedList struct {
 	Size int
 }
 
+func (ll *DoublyLinkedList) RemoveAtLast() {
+	if ll.Head == nil {
+		fmt.Println("List is Empty")
+		return
+	} else if ll.Head == ll.Tail {
+		ll.Head = nil
+		ll.Tail = nil
+	} else {
+		ll.Tail = ll.Tail.Previous
+		ll.Tail.Next = nil
+	}
+	ll.Size--
+}
 func (ll *DoublyLinkedList) AddAtLast(data int) {
 	newNode := &Node{Value: data}
 
@@ -79,5 +92,9 @@ func main() {
 
 	//Adding node at last
 	List.AddAtLast(23)
+
+	//Removing node from last
+	List.RemoveAtLast()
+	List.RemoveAtLast()
 	List.Display()
 }
